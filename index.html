@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Shiny App: Calculating BMI</title>
+  <meta charset="utf-8">
+  <meta name="description" content="Shiny App: Calculating BMI">
+  <meta name="author" content="Fabian van Beveren">
+  <meta name="generator" content="slidify" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/default.css" media="all" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/phone.css" 
+    media="only screen and (max-device-width: 480px)" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/slidify.css" >
+  <link rel="stylesheet" href="libraries/highlighters/highlight.js/css/tomorrow.css" />
+  <base target="_blank"> <!-- This amazingness opens all links in a new tab. -->  <link rel=stylesheet href="./assets/css/ribbons.css"></link>
+
+  
+  <!-- Grab CDN jQuery, fall back to local if offline -->
+  <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.min.js"></script>
+  <script>window.jQuery || document.write('<script src="libraries/widgets/quiz/js/jquery.js"><\/script>')</script> 
+  <script data-main="libraries/frameworks/io2012/js/slides" 
+    src="libraries/frameworks/io2012/js/require-1.0.8.min.js">
+  </script>
+  
+  
+
+</head>
+<body style="opacity: 0">
+  <slides class="layout-widescreen">
+    
+    <!-- LOGO SLIDE -->
+        <slide class="title-slide segue nobackground">
+  <hgroup class="auto-fadein">
+    <h1>Shiny App: Calculating BMI</h1>
+    <h2>A slidify presentation for the Data Products course</h2>
+    <p>Fabian van Beveren<br/></p>
+  </hgroup>
+  <article></article>  
+</slide>
+    
+
+    <!-- SLIDES -->
+    <slide class="" id="slide-1" style="background:;">
+  <hgroup>
+    <h2>About</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>To show what we learned in this coursera course, this Shiny app was created. 
+It calculates the BMI, based on the input:</p>
+
+<ul>
+<li>Height (cm)</li>
+<li>Weight (kg)</li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-2" style="background:;">
+  <hgroup>
+    <h2>Calculations</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>The simplest part is the calculation of the BMI itself.</p>
+
+<pre><code class="r">#The function to calculate the BMI
+calcbmi &lt;- function(height, weight) round(weight/(height/100)^2, 2)
+
+#Example
+height &lt;- 168
+weight &lt;- 60
+calcbmi(height, weight)
+</code></pre>
+
+<pre><code>## [1] 21.26
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-3" style="background:;">
+  <hgroup>
+    <h2>Calculations</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>Furthermore, to determine whether the person is of normal weight or not, the limits 
+for the given height are calculated.</p>
+
+<pre><code class="r">#Calculation
+calclimits &lt;- function(height) {
+  i &lt;- numeric(3)
+  i[1] &lt;- 18.5 * (height/100)^2 #&lt;18.5 = underweight
+  i[2] &lt;- 25 * (height/100)^2   #18.5 - 25 = normal weight
+  i[3] &lt;- 30 * (height/100)^2   #25 - 30 = overweight | &gt;30 = obese
+  i
+}
+
+#Example
+calclimits(168)
+</code></pre>
+
+<pre><code>## [1] 52.2144 70.5600 84.6720
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-4" style="background:;">
+  <hgroup>
+    <h2>Plot</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>A plot is created to show how close you are to a healthy/unhealthy weight. Code is 
+not shown in the slidify presentation, but can be found in the Rmd and of course in 
+the Shiny server files.</p>
+
+<p><img src="assets/fig/unnamed-chunk-3-1.png" title="plot of chunk unnamed-chunk-3" alt="plot of chunk unnamed-chunk-3" style="display: block; margin: auto;" /></p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+    <slide class="backdrop"></slide>
+  </slides>
+  <div class="pagination pagination-small" id='io2012-ptoc' style="display:none;">
+    <ul>
+      <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=1 title='About'>
+         1
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=2 title='Calculations'>
+         2
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=3 title='Calculations'>
+         3
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=4 title='Plot'>
+         4
+      </a>
+    </li>
+  </ul>
+  </div>  <!--[if IE]>
+    <script 
+      src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js">  
+    </script>
+    <script>CFInstall.check({mode: 'overlay'});</script>
+  <![endif]-->
+</body>
+  <!-- Load Javascripts for Widgets -->
+  
+  <!-- LOAD HIGHLIGHTER JS FILES -->
+  <script src="libraries/highlighters/highlight.js/highlight.pack.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  <!-- DONE LOADING HIGHLIGHTER JS FILES -->
+   
+  </html>
